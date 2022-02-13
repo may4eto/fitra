@@ -1,2 +1,192 @@
-// Put your styles in this file.
-// Note: "@import" rules aren’t supported.
+:root {
+    --main-font: 'Rubik', Arial, Helvetica, sans-serif;
+
+    --color-accent: #FF3700;
+    --black: #000000;
+    --white: #ffffff;
+    --text-color: #555555;
+    --color-border: #DEDEDE;
+    --color-label: #707070;
+
+    --line-global: 20px;
+    --gutter-global: calc(var(--line-global)*2);
+
+    --body-font-size: 15px;
+    --label-font-size: 12px;
+
+    --standard-border: 1px solid var( --color-border);
+}
+
+* {
+    font-family: var(--main-font);
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    color: var(--black);
+    line-height: var(--line-global);
+}
+
+body {
+    background-color: var(--white);
+    font-size: var(--body-font-size);
+}
+
+h1, h2, h3, h4, h5, h6, p, ul, ol {
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+}
+
+.headline-big {
+    font-size: 22vw;
+    line-height: 1;
+    font-weight: 300;
+}
+
+h2 {
+    font-size: calc(var(--body-font-size)*2);
+    line-height: calc(var(--line-global)*2);
+}
+
+h3 {
+    font-size: var(--body-font-size);
+    line-height: var(--line-global);
+}
+
+figure {
+    margin: 0;
+}
+
+p, ul, ol {
+    font-size: var(--body-font-size);
+    line-height: var(--line-global);
+    color: var(--text-color);
+}
+
+label {
+    color: var(--color-label);
+    font-size: var(--label-font-size);
+}
+
+select.styled-input {
+    width: 100%;
+    font-size: var(--body-font-size);
+    line-height: var(--line-global);
+    padding: var(--line-global);
+    border: var(--standard-border);
+}
+
+button.styled-input {
+    width: 100%;
+    font-size: var(--body-font-size);
+    line-height: var(--line-global);
+    padding: var(--line-global);
+    color: var(--white);
+}
+
+#add-to-car-button {
+    background-color: var(--color-accent);
+}
+
+#add-to-car-button span.price {
+    float: right;
+}
+
+.styled-input {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    line-height: normal;
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+    text-align: left;
+}
+
+.grid {
+    display: grid;
+    column-gap: var(--gutter-global);
+    row-gap: var(--gutter-global);
+}
+
+.two-columns {
+    grid-template-columns: 1fr 1fr;
+}
+
+.main-content {
+    min-height: 100vh;
+    padding: var(--gutter-global);
+    width: 50%;
+    margin-left: auto;
+}
+
+.sticky-side-image {
+    position: fixed;
+    left: 0;
+    top: var(--gutter-global);
+    bottom: var(--gutter-global);
+    width: 50%;
+}
+
+.sticky-side-image img, .single-product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.valign-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.valign-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.headline {
+    padding-bottom: calc(var(--line-global)*3);
+}
+
+.description-content {
+    margin-top: var(--line-global);
+    color: var(--text-color);
+}
+
+.list-with-stroke {
+    list-style-type: none;
+}
+
+.list-with-stroke li {
+    padding: var(--line-global) 0;
+    border-top: var(--standard-border);
+}
+
+.list-with-stroke li:last-child {
+    border-bottom: var(--standard-border);
+}
+
+.form-wrapper {
+    padding-top: calc(var(--line-global)*3);
+}
+
+#add-to-cart-form {
+    margin-top: -(var(--line-global));
+}
+
+#product-info {
+    grid-template-rows: minmax(max-content, auto) minmax(min-content, max-content);
+}

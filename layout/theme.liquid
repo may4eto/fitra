@@ -15,13 +15,13 @@
   {% if template != 'cart' %}
   <a href="/cart"class="link-to-cart">
     {% if cart.item_count > 0 %}
-      {{ 'product.cart.button.full' | t }}
+      {{ 'cart.button.full' | t }}
     {% else %}
-      {{ 'product.cart.button.empty' | t }}
+      {{ 'cart.button.empty' | t }}
     {% endif %}
   </a>
   {% else %}
-    <a href="/" class="link_to_home">{{ 'product.cart.button.close' | t }}</a>
+    <a href="/" class="link_to_home">{{ 'cart.button.close' | t }}</a>
   {% endif%}
   <main role="main">
     {{ content_for_layout }}
