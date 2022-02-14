@@ -2,7 +2,7 @@
 <main id="page-index">
   <div id="product-images" class="sticky-side-image">
     {% for image in mainProduct.images %}
-      <figure class="single-product-image">
+      <figure class="single-product-image" {% if image.attached_to_variant? %} data-variant="{{image.variants.first.id}}" {%endif%} style="{% if forloop.index > 1%} display: none; {%endif%}">
         <img src="{{ image | image_url: x1440 }}" width="300" />
       </figure>
     {% endfor %}
@@ -11,7 +11,7 @@
     <div class="valign-center">
       <h1 class="headline-big">{{ mainProduct.title | remove: ' Activity Band' }}</h1>
     </div>
-    <div class="grid two-columns">
+    <div id="product-info-content"class="grid two-columns">
       <div class="headline valign-bottom">
         <h2>{{ 'product.copy.headline' | t }}</h2>
       </div>
@@ -30,11 +30,16 @@
       <div class="form-wrapper">
         <form action="/cart/add" method="post" enctype="multipart/form-data" id="add-to-cart-form">
           <label for="productSelect">{{ mainProduct.options.first }}</label>
-          <select name="id" id="productSelect" class="styled-input">
-            {% for variant in mainProduct.variants %}
-              <option value="{{ variant.id }}">{{ variant.title }}</option>
-            {% endfor %}
-          </select>
+          <div class="styled-select">
+            <select name="id" id="variant-id" class="styled-input">
+              {% for variant in mainProduct.variants %}
+                <option value="{{ variant.id }}">{{ variant.title }}</option>
+              {% endfor %}
+            </select>
+            <div class="select-arrow">
+              <img src="{{'icon-arrow-down.svg' | asset_url }}" />
+            </div>
+          </div>
           <button type="submit" name="add" id="add-to-car-button" class="styled-input">{{ 'product.form.submit' | t }}
             <span class="price">{{ mainProduct.price | money_without_trailing_zeros }}</span>
           </button>
