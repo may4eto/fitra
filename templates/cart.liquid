@@ -2,7 +2,7 @@
   <div class="sticky-side-image">
     <img src="{{'Hero-Cart.jpg' | asset_url }}" />
   </div>
-  <div id="cart" class="main-content grid">
+  <div id="cart" class="main-content grid {% if cart.item_count > 0 %}cart-filled{% endif %}">
     <div class="valign-center">
       <h1 id="cart-title" class="headline-big">
         {{ 'cart.general.title' | t }}
@@ -11,43 +11,52 @@
     </div>
     <div id="#cart-content" class="grid two-columns">
       {% if cart.item_count > 0 %}
-        <h2>{{ 'cart.general.preorder_info' | t }}</h2>
-        <form action="/cart" method="post" novalidate>
-          <table>
-            <thead>
-              <th colspan="2">{{ 'cart.lines.title' | t }}</th>
-            </thead>
-            <tbody>
-              {% for item in cart.items %}
+        <div class="valign-bottom">
+          <h2>{{ 'cart.general.preorder_info' | t }}</h2>
+        </div>
+        <div id="cart-form-wrapper">
+          <form action="/cart" method="post" novalidate>
+            <table id="cart-lines">
+              <thead>
+                <th colspan="2">{{ 'cart.lines.title' | t }}</th>
+              </thead>
+              <tbody>
+                {% for item in cart.items %}
+                  <tr>
+                    <td>
+                      {% if item.quantity > 1 %} {{item.quantity}}x {% endif %} {{ item.product.title }} &ndash; {{ item.variant.title }}
+                    </td>
+                    <td>
+                      {{ item.line_price | money }}
+                      <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="remove-line" />
+                        <span class="remove-text">{{ 'cart.lines.remove' | t }}</span>
+                        <img src="{{'icon-x.svg' | asset_url }}" class="remove-x" />
+                      </a>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <table id="cart-totals">
+              <tbody>
                 <tr>
-                  <td>
-                    {% if item.quantity > 1 %} {{item.quantity}}x {% endif %} {{ item.product.title }} &ndash; {{ item.variant.title }}
-                  </td>
-                  <td>
-                    {{ item.line_price | money }}
-                    <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">X</a>
-                  </td>
+                  <td>{{ 'cart.lines.shipping' | t }}</td>
+                  <td>{{ 'cart.lines.free' | t }}</td>
                 </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-          <table id="cart-totals">
-            <tbody>
-              <tr>
-                <td>{{ 'cart.lines.shipping' | t }}</td>
-                <td>{{ 'cart.lines.free' | t }}</td>
-              </tr>
-              <tr>
-                <td>{{ 'cart.lines.subtotal' | t }}</td>
-                <td>{{ cart.total_price | money }}</td>
-              </tr>
-            </tbody>
-          </table>
-          <button type="submit" name="checkout">{{ 'cart.general.checkout' | t }}</button>
-        </form>
-        <p>{{ 'cart.general.support_title' | t }}
-        <br>
-        <a href="{{ 'cart.general.support_email' | t }}">{{ 'cart.general.support_email' | t }}</a></p>
+                <tr>
+                  <td>{{ 'cart.lines.subtotal' | t }}</td>
+                  <td>{{ cart.total_price | money }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <button id="checkout-button" type="submit" name="checkout" class="styled-input">{{ 'cart.general.checkout' | t }}</button>
+          </form>
+        </div>
+        <div id="cart-support">
+          <p>{{ 'cart.general.support_title' | t }}
+          <br>
+          <a href="{{ 'cart.general.support_email' | t }}">{{ 'cart.general.support_email' | t }}</a></p>
+        </div>
       {% else %}
         <div id="cart-empty-lines">
           {{ 'cart.general.empty' | t }}

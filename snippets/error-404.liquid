@@ -1,0 +1,17 @@
+{% assign mainProduct = all_products['fitra-activity-band'] %}
+<main id="page-404">
+    <div class="sticky-side-image">
+        <figure class="single-product-image">
+            <img src="{{ mainProduct.images.first | image_url: x1440 }}"/>
+        </figure>
+    </div>
+    <div id="content-404" class="main-content grid">
+        <div class="valign-center">
+            <p>
+                {{ 'general.404.title' | t }}
+                <br>
+                <a href="/"> {{ 'general.404.back' | t }}</a>
+            </p>
+        </div>
+    </div>
+</main>
